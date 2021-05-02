@@ -25,7 +25,7 @@ Route::post('/login', [LoginController::class, 'store']);
 
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::get('/posts/{post}', [PostController::class, 'index'])->name('posts.show');
+Route::get('/posts/{post}/show', [PostController::class, 'show'])->name('posts.show');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
