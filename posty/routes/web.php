@@ -8,11 +8,10 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserPostController;
+use App\Http\Controllers\Home;
 
 
-Route::get('/', function(){
-    return view('home');
-})->name('home');
+Route::get('/', [Home::class, 'show'])->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -26,6 +25,7 @@ Route::post('/login', [LoginController::class, 'store']);
 
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts/{post}', [PostController::class, 'index'])->name('posts.show');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
