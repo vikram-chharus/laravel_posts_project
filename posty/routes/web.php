@@ -17,7 +17,6 @@ Route::get('/', [Home::class, 'show'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::get('/register/admin', [RegisterController::class, 'index_admin'])->name('register.admin');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
@@ -39,3 +38,6 @@ Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy']);
 Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('user.posts');
 Route::get('manage/user/{user}', [UserController::class, 'viewDetails'])->name('manage.user');
 Route::post('manage/user/update/{user}', [UserController::class, 'update'])->name('manage.user.update');
+
+Route::get('/user/{user}', [UserController::class, 'user_profile'])->name('user.profile');
+Route::post('/user/{user}/update', [UserController::class, 'user_update'])->name('user.profile.update');

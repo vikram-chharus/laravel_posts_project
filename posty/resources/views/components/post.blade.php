@@ -3,10 +3,8 @@
                         <a href="{{ route('user.posts', $post->user)}}" class="font-bold">{{$post->user->name}}</a> 
                         <span class="text-grey-600 text-sm">{{$post->created_at->diffForHumans()}}</span>
                         @if(Str::is(URL::current(),"http://127.0.0.1:8000/posts/$post->id/show"))
-                            <p class="mb-2"> {{$post->body}}</p>
-                            @can('delete', $post)
-                        @endcan
-                        @if(auth()->user()->IsAdmin)
+                            <textarea class="mb-2 p-2" rows="{{str_word_count($post->body)/5}}" cols="110" readonly="true"> {{$post->body}}</textarea>
+                        @can('delete', $post)
                         <form class="mr-1" action="{{route('posts.edit', $post)}}" method="get">
                             @csrf
                             <button type="submit" class="tmb-2 text-yellow-500">Edit</button>
@@ -16,10 +14,10 @@
                             @method('DELETE')
                             <button type="submit" class="tmb-2 text-red-500">Delete</button>
                         </form>
-                        @endif
+                        @endcan
                         @else
                             @if(Str::length($post->body) > 50)
-                                <p class="mb-2"> {{Str::limit($post->body, 50)}}</p>
+                                <p class="mb-2"> {{Str::limit($post->body, 100)}}</p>
                             @else
                                 <p class="mb-2"> {{$post->body}}</p>
                             @endif

@@ -12,18 +12,15 @@ class RegisterController extends Controller
     
     public function __construct() 
     {
-        $this->middleware(['guest'])->except('index_admin');
+        $this->middleware(['guest']);
     }
     
     public function index(){
         return view('auth.register');
     }
-    public function index_admin(){
-        return view('auth.register');
-    }
+  
     public function store(Request $request){
-    
-        auth()->logout();    
+      
         $this->validate($request, [
             'name' => 'required|max:255',
             'username' => 'required|max:255',
@@ -40,13 +37,9 @@ class RegisterController extends Controller
                 'IsAdmin' => false
             ]
         );
-        if(!auth())
-        {
-            auth()->attempt($request->only('email', 'password'));
-            return redirect()->route('home');
-        }
-        return redirect()->route('dashboard');
-        
+        auth()->attempt($request->only('email', 'password'));
+        return redirect()->route('home');
         
     }
+    
 }

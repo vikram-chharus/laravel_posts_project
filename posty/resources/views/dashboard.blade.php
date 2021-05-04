@@ -24,12 +24,11 @@
             </div>
         @endif
         <h1 class="text-2xl font-medium mb-1">Manage Users</h1>
-        <span class="text-blue-500"><a href="{{route('register.admin')}}">Add user</a></span> 
         </div>
         <div class="bg-white p-6 rounded-lg">
         <div>
            @foreach($users as $user)
-           <h3><a href="{{route('manage.user', $user)}}">{{$user->name}}</a></h3>
+           <h3><a href="{{route('manage.user', $user)}}">{{$user->username}}</a></h3>
            @endforeach
            </div>
         </div>
