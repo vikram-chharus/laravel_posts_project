@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\Home;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [Home::class, 'show'])->name('home');
@@ -16,6 +17,7 @@ Route::get('/', [Home::class, 'show'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/register/admin', [RegisterController::class, 'index_admin'])->name('register.admin');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
@@ -28,8 +30,12 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/{post}/show', [PostController::class, 'show'])->name('posts.show');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
+Route::post('/posts/update/{post}', [PostController::class, 'update'])->name('posts.update');
 
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
 Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy']);
 
 Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('user.posts');
+Route::get('manage/user/{user}', [UserController::class, 'viewDetails'])->name('manage.user');
+Route::post('manage/user/update/{user}', [UserController::class, 'update'])->name('manage.user.update');

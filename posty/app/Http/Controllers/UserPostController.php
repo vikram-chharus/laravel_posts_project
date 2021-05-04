@@ -15,4 +15,7 @@ class UserPostController extends Controller
             'posts'=>$posts
         ]);
     }
+    public function updateUser(User $user){
+        
+    }
 }

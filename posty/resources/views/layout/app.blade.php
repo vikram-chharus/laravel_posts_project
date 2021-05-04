@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title>Online Notice</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-gray-200 ">
@@ -13,13 +13,16 @@
             <li>
                 <a href="/" class="p-3">Home</a>
             </li>
-            <!-- <li>
-                <a href="{{ route('dashboard')}}" class="p-3">Dashboard</a>
-            </li> -->
             @auth
+            @if(auth()->user()->IsAdmin)
+            <li>
+                <a href="{{ route('dashboard')}}" class="p-3">Dashboard</a>
+            </li>
+            
             <li>
                 <a href="{{ route('posts') }}" class="p-3">Write a notice</a>
             </li>
+            @endif
             @endauth
         </ul>
         <ul class="flex items-center">

@@ -5,12 +5,18 @@
                         @if(Str::is(URL::current(),"http://127.0.0.1:8000/posts/$post->id/show"))
                             <p class="mb-2"> {{$post->body}}</p>
                             @can('delete', $post)
+                        @endcan
+                        @if(auth()->user()->IsAdmin)
+                        <form class="mr-1" action="{{route('posts.edit', $post)}}" method="get">
+                            @csrf
+                            <button type="submit" class="tmb-2 text-yellow-500">Edit</button>
+                        </form>
                         <form class="mr-1" action="{{route('posts.destroy', $post)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-blue-500">Delete</button>
+                            <button type="submit" class="tmb-2 text-red-500">Delete</button>
                         </form>
-                        @endcan
+                        @endif
                         @else
                             @if(Str::length($post->body) > 50)
                                 <p class="mb-2"> {{Str::limit($post->body, 50)}}</p>
